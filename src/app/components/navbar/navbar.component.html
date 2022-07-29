@@ -1,0 +1,26 @@
+<div class="container-fluid px-0">
+    <nav class="navbar navbar-expand bg-dark navbar-dark" [ngClass]="{'fixed-bottom': isMobilePortrait}">
+        <a class="navbar-brand" routerLink="">Archery Round Guide</a>
+
+        <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+            &#9776;
+        </button>
+
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="nav-item " routerLinkActive="active">
+                    <a routerLink="rounds" class="nav-link">Metric</a>
+                </li>
+                <li class="nav-item " routerLinkActive="active">
+                    <a routerLink="rounds" class="nav-link">Imperial</a>
+                </li>
+                <li class="nav-item " routerLinkActive="active">
+                    <a routerLink="rounds" class="nav-link">Indoor</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="body-content" [ngClass]="{'padded-bottom': isMobilePortrait, 'padded-top': !isMobilePortrait}">
+        <router-outlet></router-outlet>
+    </div>
+</div>
