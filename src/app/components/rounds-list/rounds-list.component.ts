@@ -46,7 +46,15 @@ export class RoundsListComponent implements OnInit {
   }
 
   public getRounds(roundType: string): Round[] {
-    return this.rounds.filter(round => {return round.scoringType === roundType});
+    if (roundType == "Imperial") {
+      return this.rounds.filter(round => {return round.scoringType === roundType});
+    } else if (roundType == "Indoor") {
+      return this.rounds.filter(round => {return round.venue === "Indoor"});
+    } else if (roundType == "Metric") {
+      return this.rounds.filter(round => {return round.scoringType === "Metric" && round.venue === "Outdoor"})
+    } else {
+      return [];
+    }
   }
 
   public getDozensByDistance(round: Round, distance: number): string {
