@@ -67,4 +67,18 @@ export class HandicapCalculationService {
 
   }
 
+  public getRequiredScore(round: Round, classification: string, gender: string, ageGroup: string, bowType: string): string {
+    const handicapTable = this.getHandicapTable(round);
+    if (classification === "Bowman") {
+      return "" + handicapTable.get(36);
+    } else if (classification === "1st") {
+      return "" + handicapTable.get(44);
+    } else if (classification === "2nd") {
+      return "" + handicapTable.get(50);
+    } else if (classification === "3rd") {
+      return "" + handicapTable.get(58);
+    }
+    return "N/A";
+  }
+
 }

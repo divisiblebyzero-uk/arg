@@ -25,7 +25,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let round of getRounds(roundType)">
-                            <td>{{round.name}}</td>
+                            <td (click)="showDetails(round)">{{round.name}}</td>
                             <td *ngFor="let distance of getRoundDistances(roundType)">{{getDozensByDistance(round, distance)}}</td>
                         </tr>
                     </tbody>

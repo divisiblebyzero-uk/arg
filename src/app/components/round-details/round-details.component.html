@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="mx-auto text-center">
+            <h1 class="mb-3">{{ round.name }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 my-3">
+            <div>
+                {{ round.scoringType }}
+            </div>
+            <div>
+                {{ round.venue }}
+            </div>
+            <div *ngFor="let distance of round.distances">
+                {{ distance.arrows }} x {{ distance.length.displayString }} ({{ distance.faceSize.displayString }} face)
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Classification</th>
+                            <th>Required score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GMB</td>
+                            <td>{{getRequiredScore('GMB')}}</td>
+                        </tr>
+                        <tr>
+                            <td>MB</td>
+                            <td>{{getRequiredScore('MB')}}</td>
+                        </tr>
+                        <tr>
+                            <td>Bowman</td>
+                            <td>{{getRequiredScore('Bowman')}}</td>
+                        </tr>
+                        <tr>
+                            <td>1st</td>
+                            <td>{{getRequiredScore('1st')}}</td>
+                        </tr>
+                        <tr>
+                            <td>2nd</td>
+                            <td>{{getRequiredScore('2nd')}}</td>
+                        </tr>
+                        <tr>
+                            <td>3rd</td>
+                            <td>{{getRequiredScore('3rd')}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6 my-3">
+            <app-round-handicap-chart></app-round-handicap-chart>
+        </div>
+    </div>
+</div>
