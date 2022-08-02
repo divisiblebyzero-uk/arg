@@ -11,6 +11,7 @@ import { RoundsListComponent } from './components/rounds-list/rounds-list.compon
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RoundDetailsComponent } from './components/round-details/round-details.component';
 import { RoundHandicapChartComponent } from './components/round-handicap-chart/round-handicap-chart.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RoundHandicapChartComponent } from './components/round-handicap-chart/r
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    NgChartsModule
+    NgChartsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,7 +8,9 @@ export class HandicapCalculationService {
 
   private handicapTables: Map<string, Map<number, number>> = new Map<string, Map<number, number>>();
 
-  constructor() { }
+  constructor() { 
+    this.populateHandicapClassificationLookupMap();
+  }
 
   public getHandicapForScore(round: Round, score: number): number {
     const handicapTable = this.getHandicapTable(round);
@@ -67,18 +69,58 @@ export class HandicapCalculationService {
 
   }
 
-  public getRequiredScore(round: Round, classification: string, gender: string, ageGroup: string, bowType: string): string {
-    const handicapTable = this.getHandicapTable(round);
-    if (classification === "Bowman") {
-      return "" + handicapTable.get(36);
-    } else if (classification === "1st") {
-      return "" + handicapTable.get(44);
-    } else if (classification === "2nd") {
-      return "" + handicapTable.get(50);
-    } else if (classification === "3rd") {
-      return "" + handicapTable.get(58);
-    }
-    return "N/A";
+  public getRequiredScore(round: Round, classification: string, roundConfiguration: RoundConfiguration): string {
+    
+    const cm = this.hclm.filter(m => { return m.roundConfiguration === JSON.stringify(roundConfiguration) });
+    if (cm.length > 0) {
+      const candidate = cm[0];
+      const hc = candidate.classificationMap.get(classification);
+      if (hc) {
+        const score = this.getHandicapTable(round).get(hc);
+        if (score) {
+          return "" + score;
+        }
+      } 
+      }
+
+
+    return "";
   }
 
+  hclm: { roundConfiguration: string, classificationMap: Map<string, number>} [] = [];
+
+  private populateHandicapClassificationLookupMap() {
+    const maleSeniorRecurveClassificationMap = new Map<string, number>();
+    maleSeniorRecurveClassificationMap.set("Bowman", 36);
+    maleSeniorRecurveClassificationMap.set("1st", 44);
+    maleSeniorRecurveClassificationMap.set("2nd", 50);
+    maleSeniorRecurveClassificationMap.set("3rd", 58);
+
+    this.hclm.push( { roundConfiguration: JSON.stringify({     bowType: 'Recurve',     gender: 'Male',ageGroup: 'Senior'}), classificationMap: maleSeniorRecurveClassificationMap});
+
+    const femaleSeniorRecurveClassificationMap = new Map<string, number>();
+    femaleSeniorRecurveClassificationMap.set("Bowman", 41);
+    femaleSeniorRecurveClassificationMap.set("1st", 50);
+    femaleSeniorRecurveClassificationMap.set("2nd", 57);
+    femaleSeniorRecurveClassificationMap.set("3rd", 65);
+
+    this.hclm.push( { roundConfiguration: JSON.stringify({     bowType: 'Recurve',     gender: 'Female',ageGroup: 'Senior'}), classificationMap: femaleSeniorRecurveClassificationMap});
+
+  }
+  
+
+
 }
+
+export const GENDERS: string[] = ['Male', 'Female'];
+export const BOWTYPES: string[] = ['Recurve', 'Compound', 'Longbow', 'Barebow'];
+export const AGEGROUPS: string[] = ['Senior', 'U-18', 'U-16', 'U-14', 'U-12'];
+
+export const CLASSIFICATIONS: string[] = ['GMB', 'MB', 'Bowman', '1st', '2nd', '3rd'];
+
+export interface RoundConfiguration {
+  bowType: string;
+  gender: string;
+  ageGroup: string;
+}
+

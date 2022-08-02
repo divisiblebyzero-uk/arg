@@ -8,6 +8,43 @@
         </div>
     </div>
 
+    <form #scorecardForm="ngForm">
+        <div class="row">
+
+            <div class="col-lg-6 col-xs-12">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender" required name="gender" #gender="ngModel"
+                        [(ngModel)]="roundConfiguration.gender">
+                        <option *ngFor="let gender of genders" id="{{gender}}">{{gender}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+                <div class="form-group">
+                    <label for="bowType">Bow type</label>
+                    <select class="form-control" id="bowType" required name="bowType" #gender="ngModel"
+                        [(ngModel)]="roundConfiguration.bowType">
+                        <option *ngFor="let bowType of bowTypes" id="{{bowType}}">{{bowType}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+                <div class="form-group">
+                    <label for="ageGroup">Age group</label>
+                    <select class="form-control" id="ageGroup" required name="ageGroup" #gender="ngModel"
+                        [(ngModel)]="roundConfiguration.ageGroup">
+                        <option *ngFor="let ageGroup of ageGroups" id="{{ageGroup}}">{{ageGroup}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div clas="row">
+    </div>
+    {{roundConfiguration|json}}
+
     <ng-container *ngFor="let roundType of ROUND_TYPES">
         <div class="row">
             <div class="py-2 mx-auto text-center">
@@ -21,19 +58,21 @@
                         <tr>
                             <th>Round</th>
                             <th *ngFor="let distance of getRoundDistances(roundType)">{{distance}}</th>
+                            <th *ngFor="let classification of classifications">{{classification}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let round of getRounds(roundType)">
                             <td (click)="showDetails(round)">{{round.name}}</td>
                             <td *ngFor="let distance of getRoundDistances(roundType)">{{getDozensByDistance(round, distance)}}</td>
+                            <td *ngFor="let classification of classifications">{{getRequiredScore(round, classification)}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </ng-container>
-
+</div>
 
 
 {{width}} x {{height}}

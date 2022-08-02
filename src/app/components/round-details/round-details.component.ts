@@ -25,7 +25,7 @@ export class RoundDetailsComponent implements OnInit {
   }
 
   public getRequiredScore(classification: string): string {
-    return this.hcs.getRequiredScore(this.round, classification, 'Male', 'Senior', 'Recurve');
+    return this.hcs.getRequiredScore(this.round, classification, {gender: 'Male', ageGroup: 'Senior', bowType: 'Recurve'});
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { arrow } from '@popperjs/core';
 import { ROUNDS, Round } from 'src/app/model/round';
+import { AGEGROUPS, BOWTYPES, CLASSIFICATIONS, GENDERS, HandicapCalculationService, RoundConfiguration } from 'src/app/service/handicap-calculation-service.service';
 
 @Component({
   selector: 'app-rounds-list',
@@ -10,6 +11,11 @@ import { ROUNDS, Round } from 'src/app/model/round';
 })
 export class RoundsListComponent implements OnInit {
 
+  classifications = CLASSIFICATIONS;  
+  genders = GENDERS;
+  bowTypes = BOWTYPES;
+  ageGroups = AGEGROUPS;
+
   ROUND_TYPES = ["Imperial", "Metric", "Indoor"];
   IMPERIAL_ROUND_DISTANCES = [100, 80, 60, 50, 40, 30, 20, 10 ];
   METRIC_ROUND_DISTANCES = [];
@@ -17,12 +23,16 @@ export class RoundsListComponent implements OnInit {
 
   rounds: Round[] = ROUNDS;
 
-  
+  roundConfiguration: RoundConfiguration = {
+    bowType: "Recurve",
+    gender: "Male", 
+    ageGroup: "Senior"
+  }
 
   height!: number;
   width!: number;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private hcs: HandicapCalculationService) { }
 
   ngOnInit(): void {
     this.height = window.innerHeight;
@@ -73,4 +83,7 @@ export class RoundsListComponent implements OnInit {
     
   }
 
+  public getRequiredScore(round: Round, classification: string): string {
+    return this.hcs.getRequiredScore(round, classification, this.roundConfiguration);
+  }
 }
