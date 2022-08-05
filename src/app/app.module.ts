@@ -12,7 +12,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RoundDetailsComponent } from './components/round-details/round-details.component';
 import { RoundHandicapChartComponent } from './components/round-handicap-chart/round-handicap-chart.component';
 import { FormsModule } from '@angular/forms';
-
+import { APP_BASE_HREF } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     NgChartsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

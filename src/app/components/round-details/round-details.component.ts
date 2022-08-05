@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Round, ROUNDS } from 'src/app/model/round';
-import { HandicapCalculationService } from 'src/app/service/handicap-calculation-service.service';
+import { Round, ROUNDS } from '../../model/round';
+import { HandicapCalculationService } from '../../service/handicap-calculation-service.service';
 
 
 @Component({

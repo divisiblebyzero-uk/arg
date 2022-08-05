@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { arrow } from '@popperjs/core';
-import { ROUNDS, Round } from 'src/app/model/round';
-import { AGEGROUPS, BOWTYPES, CLASSIFICATIONS, GENDERS, HandicapCalculationService, RoundConfiguration } from 'src/app/service/handicap-calculation-service.service';
+import { ROUNDS, Round } from '../../model/round';
+import { AGEGROUPS, BOWTYPES, CLASSIFICATIONS, GENDERS, HandicapCalculationService, RoundConfiguration } from '../../service/handicap-calculation-service.service';
 
 @Component({
   selector: 'app-rounds-list',

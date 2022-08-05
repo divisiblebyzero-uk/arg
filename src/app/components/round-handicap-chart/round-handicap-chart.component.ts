@@ -2,10 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { /*ChartDataSets,*/ ChartConfiguration, ChartType, Chart } from 'chart.js';
 //import { Color, Label } from 'ng2-charts';
-import { Round, ROUNDS } from 'src/app/model/round';
-import { HandicapCalculationService } from 'src/app/service/handicap-calculation-service.service';
+import { Round, ROUNDS } from '../../model/round';
+import { HandicapCalculationService } from '../../service/handicap-calculation-service.service';
 import {default as Annotation} from 'chartjs-plugin-annotation';
-import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-round-handicap-chart',
@@ -13,8 +12,6 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./round-handicap-chart.component.sass']
 })
 export class RoundHandicapChartComponent implements OnInit {
-
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   round!: Round;
   handicapTable!: Map<number, number>;
@@ -38,7 +35,7 @@ export class RoundHandicapChartComponent implements OnInit {
         });
         this.handicapData = [ {data: data }];
 
-this.chart?.update();
+
       }
     })
   }
@@ -46,7 +43,7 @@ this.chart?.update();
   public handicapData: (number[]&any)[] = [];
 
   public lineChartConfiguration: (ChartConfiguration['options'] & { responsive: any}) = {
-    responsive: true,
+    responsive: true,/*
     elements: {
       line: {
         tension: 0.5
@@ -133,7 +130,7 @@ this.chart?.update();
           labels: ["score"]
         }
     },
-
+*/
   }
 /*
   public handicapData: ChartDataSets[] = [];
